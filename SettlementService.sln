@@ -3,7 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService", "SettlementService\SettlementService.csproj", "{A2380ADC-2E95-4300-8898-D24A7F6300D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.API", "SettlementService\SettlementService.API.csproj", "{A2380ADC-2E95-4300-8898-D24A7F6300D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{D4547A0C-A34B-44F4-B165-12782E62771B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{D527525C-BE02-49BC-AC1C-DB301EAA2D25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{76193AD4-0D17-4003-8B0D-07B918989A8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{10D1F756-0FDE-443F-A80C-A3DD451E77A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Domain", "SettlementService.Domain\SettlementService.Domain.csproj", "{59BD14EB-BD6B-4605-9F08-5CCFCA4B867B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Infrastructure", "SettlementService.Infrastructure\SettlementService.Infrastructure.csproj", "{59248664-5C1B-4B38-B63C-0F2CF9081FAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Services", "SettlementService.Service\SettlementService.Services.csproj", "{AA75DF7E-5C7A-4C7D-BEE1-E01B7F6327EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Interfaces", "SettlementService.Interfaces\SettlementService.Interfaces.csproj", "{4AC0BFDF-7D13-4D55-9145-AD984EB3D054}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Services", "SettlementService.Services\SettlementService.Services.csproj", "{B4BB174D-12EA-4C23-B45C-B27C4DA31956}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Constants", "SettlementService.Constants\SettlementService.Constants.csproj", "{284AFC04-56B6-4457-8314-3EC48701AB08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +35,41 @@ Global
 		{A2380ADC-2E95-4300-8898-D24A7F6300D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2380ADC-2E95-4300-8898-D24A7F6300D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2380ADC-2E95-4300-8898-D24A7F6300D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59BD14EB-BD6B-4605-9F08-5CCFCA4B867B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59BD14EB-BD6B-4605-9F08-5CCFCA4B867B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59BD14EB-BD6B-4605-9F08-5CCFCA4B867B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59BD14EB-BD6B-4605-9F08-5CCFCA4B867B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59248664-5C1B-4B38-B63C-0F2CF9081FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59248664-5C1B-4B38-B63C-0F2CF9081FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59248664-5C1B-4B38-B63C-0F2CF9081FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59248664-5C1B-4B38-B63C-0F2CF9081FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA75DF7E-5C7A-4C7D-BEE1-E01B7F6327EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA75DF7E-5C7A-4C7D-BEE1-E01B7F6327EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA75DF7E-5C7A-4C7D-BEE1-E01B7F6327EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA75DF7E-5C7A-4C7D-BEE1-E01B7F6327EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AC0BFDF-7D13-4D55-9145-AD984EB3D054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC0BFDF-7D13-4D55-9145-AD984EB3D054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AC0BFDF-7D13-4D55-9145-AD984EB3D054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AC0BFDF-7D13-4D55-9145-AD984EB3D054}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4BB174D-12EA-4C23-B45C-B27C4DA31956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4BB174D-12EA-4C23-B45C-B27C4DA31956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4BB174D-12EA-4C23-B45C-B27C4DA31956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4BB174D-12EA-4C23-B45C-B27C4DA31956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{284AFC04-56B6-4457-8314-3EC48701AB08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{284AFC04-56B6-4457-8314-3EC48701AB08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{284AFC04-56B6-4457-8314-3EC48701AB08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{284AFC04-56B6-4457-8314-3EC48701AB08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{59BD14EB-BD6B-4605-9F08-5CCFCA4B867B} = {D527525C-BE02-49BC-AC1C-DB301EAA2D25}
+		{59248664-5C1B-4B38-B63C-0F2CF9081FAB} = {76193AD4-0D17-4003-8B0D-07B918989A8D}
+		{AA75DF7E-5C7A-4C7D-BEE1-E01B7F6327EE} = {D4547A0C-A34B-44F4-B165-12782E62771B}
+		{4AC0BFDF-7D13-4D55-9145-AD984EB3D054} = {D4547A0C-A34B-44F4-B165-12782E62771B}
+		{B4BB174D-12EA-4C23-B45C-B27C4DA31956} = {10D1F756-0FDE-443F-A80C-A3DD451E77A8}
+		{284AFC04-56B6-4457-8314-3EC48701AB08} = {D4547A0C-A34B-44F4-B165-12782E62771B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B3CFB8B-C9D4-46F0-A805-BE187E6D1FEC}
