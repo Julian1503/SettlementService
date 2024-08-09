@@ -9,8 +9,8 @@ namespace SettlementService.Domain.Abstractions
 {
     public interface IRepository <T> where T : BaseEntity
     {
-        Guid Create(T entity);
-        List<T> GetAll();
-        T GetById(Guid id);
+        Task<Guid> Create(T entity);
+        Task<List<T>> GetAll();
+        Task<T> GetById(Guid id);
     }
 }

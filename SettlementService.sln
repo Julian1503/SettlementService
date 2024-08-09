@@ -21,9 +21,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Services"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Interfaces", "SettlementService.Interfaces\SettlementService.Interfaces.csproj", "{4AC0BFDF-7D13-4D55-9145-AD984EB3D054}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Services", "SettlementService.Services\SettlementService.Services.csproj", "{B4BB174D-12EA-4C23-B45C-B27C4DA31956}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Services.Test", "SettlementService.Services\SettlementService.Services.Test.csproj", "{B4BB174D-12EA-4C23-B45C-B27C4DA31956}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Constants", "SettlementService.Constants\SettlementService.Constants.csproj", "{284AFC04-56B6-4457-8314-3EC48701AB08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Infrastructure.Test", "SettlementService.Infrastructure.Test\SettlementService.Infrastructure.Test.csproj", "{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{284AFC04-56B6-4457-8314-3EC48701AB08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{284AFC04-56B6-4457-8314-3EC48701AB08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{284AFC04-56B6-4457-8314-3EC48701AB08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +76,7 @@ Global
 		{4AC0BFDF-7D13-4D55-9145-AD984EB3D054} = {D4547A0C-A34B-44F4-B165-12782E62771B}
 		{B4BB174D-12EA-4C23-B45C-B27C4DA31956} = {10D1F756-0FDE-443F-A80C-A3DD451E77A8}
 		{284AFC04-56B6-4457-8314-3EC48701AB08} = {D4547A0C-A34B-44F4-B165-12782E62771B}
+		{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6} = {10D1F756-0FDE-443F-A80C-A3DD451E77A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B3CFB8B-C9D4-46F0-A805-BE187E6D1FEC}
