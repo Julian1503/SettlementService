@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SettlementService.Interfaces.Model
+﻿namespace SettlementService.Interfaces.Model
 {
     public class BookingModel
     {

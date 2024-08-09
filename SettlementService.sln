@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Constants
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Infrastructure.Test", "SettlementService.Infrastructure.Test\SettlementService.Infrastructure.Test.csproj", "{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Mapper", "SettlementService.Mapper\SettlementService.Mapper.csproj", "{73AEE507-CED4-4A36-BB13-A62DE7F754D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.API.Test", "SettlementService.API.Test\SettlementService.API.Test.csproj", "{0883E726-3F4F-4AA0-9436-6B424E64F141}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,14 @@ Global
 		{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73AEE507-CED4-4A36-BB13-A62DE7F754D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73AEE507-CED4-4A36-BB13-A62DE7F754D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73AEE507-CED4-4A36-BB13-A62DE7F754D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73AEE507-CED4-4A36-BB13-A62DE7F754D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0883E726-3F4F-4AA0-9436-6B424E64F141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0883E726-3F4F-4AA0-9436-6B424E64F141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0883E726-3F4F-4AA0-9436-6B424E64F141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0883E726-3F4F-4AA0-9436-6B424E64F141}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +89,8 @@ Global
 		{B4BB174D-12EA-4C23-B45C-B27C4DA31956} = {10D1F756-0FDE-443F-A80C-A3DD451E77A8}
 		{284AFC04-56B6-4457-8314-3EC48701AB08} = {D4547A0C-A34B-44F4-B165-12782E62771B}
 		{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6} = {10D1F756-0FDE-443F-A80C-A3DD451E77A8}
+		{73AEE507-CED4-4A36-BB13-A62DE7F754D4} = {D4547A0C-A34B-44F4-B165-12782E62771B}
+		{0883E726-3F4F-4AA0-9436-6B424E64F141} = {10D1F756-0FDE-443F-A80C-A3DD451E77A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B3CFB8B-C9D4-46F0-A805-BE187E6D1FEC}

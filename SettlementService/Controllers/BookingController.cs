@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SettlementService.Interfaces;
 
 namespace SettlementService.API.Controllers
 {
@@ -7,6 +8,17 @@ namespace SettlementService.API.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
+        private IBookingService _bookingService;
 
+        public BookingController(IBookingService bookingService)
+        {
+            _bookingService = bookingService;
+        }
+
+        [HttpPost("AddBooking")]
+        public IActionResult AddBooking()
+        {
+           return Ok();
+        }
     }
 }
