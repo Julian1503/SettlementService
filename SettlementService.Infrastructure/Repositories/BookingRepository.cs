@@ -20,9 +20,9 @@ namespace SettlementService.Infrastructure.Repositories
             return booking.Id;
         }
 
-        public Task<List<Booking>> GetAllAsync()
+        public async Task<List<Booking>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Bookings.ToListAsync();
         }
 
         public Task<Booking> GetByIdAsync(Guid id)

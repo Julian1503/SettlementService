@@ -38,8 +38,8 @@ namespace SettlementService.Infrastructure.Test.Repositories
         {
             var bookings = new List<Booking>
             {
-                new Booking { Id = Guid.NewGuid(), ClientName = "John Doe", BookingTime = new TimeOnly(10,0) },
-                new Booking { Id = Guid.NewGuid(), ClientName = "Jane Doe", BookingTime = new TimeOnly(11,0) }
+                new Booking { Id = Guid.NewGuid(), ClientName = "Juan", BookingTime = new TimeOnly(10,0) },
+                new Booking { Id = Guid.NewGuid(), ClientName = "Pepe", BookingTime = new TimeOnly(11,0) }
             };
 
             _context.Bookings.AddRange(bookings);
@@ -76,6 +76,17 @@ namespace SettlementService.Infrastructure.Test.Repositories
             List<Booking> bookings = await _repository.GetAllAsync();
             Assert.NotNull(bookings);
             Assert.IsTrue(bookings.Count > 0);
+        }
+
+        [Test]
+        public async Task GetAll_ShouldBringAllBookingsWithCorrectValues()
+        {
+            //override bookings from context to test
+            List<Booking> bookings = await _repository.GetAllAsync();
+            Assert.NotNull(bookings);
+            Assert.IsTrue(bookings.Count > 0);
+            Assert.AreEqual(expected: "Juan", actual: bookings[0].ClientName);
+            Assert.AreEqual(expected: "Pepe", actual: bookings[1].ClientName);
         }
     }
 }
