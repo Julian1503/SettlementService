@@ -25,9 +25,11 @@ namespace SettlementService.Infrastructure.Repositories
             return await _context.Bookings.ToListAsync();
         }
 
-        public Task<Booking> GetByIdAsync(Guid id)
+        public async Task<Booking> GetByIdAsync(Guid bookingId)
         {
-            throw new NotImplementedException();
+            var booking = await _context.Bookings.FirstOrDefaultAsync(x => x.Id == bookingId);
+
+            return booking;
         }
 
         public Task<List<Booking>> GetByTimeAsync(TimeOnly bookingTime)

@@ -9,6 +9,6 @@ namespace SettlementService.Interfaces
 {
     public interface IBookingService
     {
-        Guid AddNewBooking(BookingModel booking);
+        Task<Guid> AddNewBooking(BookingModel booking);
     }
 }

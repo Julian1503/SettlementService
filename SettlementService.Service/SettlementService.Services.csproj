@@ -7,15 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SettlementService.Constants\SettlementService.Constants.csproj" />
     <ProjectReference Include="..\SettlementService.Domain\SettlementService.Domain.csproj" />
+    <ProjectReference Include="..\SettlementService.Interfaces\SettlementService.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
