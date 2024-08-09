@@ -95,5 +95,21 @@ namespace SettlementService.Infrastructure.Test.Repositories
             Booking booking = await _repository.GetByIdAsync(_context.Bookings.First().Id);
             Assert.NotNull(booking);
         }
+
+        [Test]
+        public void GetById_ShouldThrowKeyNotFoundException()
+        {
+            Guid nonExistentId = Guid.NewGuid();
+            var ex = Assert.ThrowsAsync<KeyNotFoundException>(async () => await _repository.GetByIdAsync(nonExistentId));
+            Assert.AreEqual("Booking not found.", ex.Message);
+        }
+
+        [Test]
+        public async Task GetById_ShouldBringABookingWithCorrectValues()
+        {
+            Booking booking = await _repository.GetByIdAsync(_context.Bookings.First().Id);
+            Assert.NotNull(booking);
+            Assert.AreEqual(expected: "Juan", actual: booking.ClientName);
+        }
     }
 }

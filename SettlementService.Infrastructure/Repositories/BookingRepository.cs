@@ -29,6 +29,11 @@ namespace SettlementService.Infrastructure.Repositories
         {
             var booking = await _context.Bookings.FirstOrDefaultAsync(x => x.Id == bookingId);
 
+            if (booking == null)
+            {
+                throw new KeyNotFoundException($"Booking not found.");
+            }
+
             return booking;
         }
 
