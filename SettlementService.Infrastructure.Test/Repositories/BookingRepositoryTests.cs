@@ -88,5 +88,12 @@ namespace SettlementService.Infrastructure.Test.Repositories
             Assert.AreEqual(expected: "Juan", actual: bookings[0].ClientName);
             Assert.AreEqual(expected: "Pepe", actual: bookings[1].ClientName);
         }
+
+        [Test]
+        public async Task GetById_ShouldBringABooking()
+        {
+            Booking booking = await _repository.GetByIdAsync(_context.Bookings.First().Id);
+            Assert.NotNull(booking);
+        }
     }
 }
