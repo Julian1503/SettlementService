@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SettlementService.Domain.Abstractions;
 using SettlementService.Domain.Entities;
 using SettlementService.Infrastructure.Repositories;
 
 namespace SettlementService.Infrastructure.Test.Repositories
 {
+    [TestFixture]
     public class BookingRepositoryTests
     {
         private DataContext _context;
-        private BookingRepository _repository;
-
+        private IBookingRepository _repository;
 
         [SetUp]
         public void SetUp()
         {
             var options = new DbContextOptionsBuilder<DataContext>()
-           .UseInMemoryDatabase(databaseName: "TestDB")
-           .Options;
-
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .Options;
             _context = new DataContext(options);
             _repository = new BookingRepository(_context);
 
@@ -53,7 +47,7 @@ namespace SettlementService.Infrastructure.Test.Repositories
             Guid newBookingId = await _repository.CreateAsync(booking);
             Booking newBooking = await _context.Bookings.FindAsync(newBookingId);
 
-            Assert.AreNotEqual(expected: Guid.Empty, actual: newBookingId);
+            Assert.That(actual: newBookingId, Is.Not.EqualTo(Guid.Empty));
             Assert.NotNull(newBooking);
         }
 
@@ -64,16 +58,16 @@ namespace SettlementService.Infrastructure.Test.Repositories
             Guid newBookingId = await _repository.CreateAsync(booking);
             Booking newBooking = await _context.Bookings.FindAsync(newBookingId);
 
-            Assert.AreEqual(expected: booking.Id, actual: newBooking.Id);
-            Assert.AreEqual(expected: booking.ClientName, actual: newBooking.ClientName);
-            Assert.AreEqual(expected: booking.BookingTime, actual: newBooking.BookingTime);
+            Assert.That(actual: newBooking.Id, Is.EqualTo(booking.Id));
+            Assert.That(actual: newBooking.ClientName, Is.EqualTo(booking.ClientName));
+            Assert.That(actual: newBooking.BookingTime, Is.EqualTo(booking.BookingTime));
         }
 
         [Test]
         public async Task GetAll_ShouldBringAllBookings()
         {
             //override bookings from context to test
-            List<Booking> bookings = await _repository.GetAllAsync();
+            List<Booking> bookings = (await _repository.GetAllAsync()).ToList();
             Assert.NotNull(bookings);
             Assert.IsTrue(bookings.Count > 0);
         }
@@ -82,11 +76,11 @@ namespace SettlementService.Infrastructure.Test.Repositories
         public async Task GetAll_ShouldBringAllBookingsWithCorrectValues()
         {
             //override bookings from context to test
-            List<Booking> bookings = await _repository.GetAllAsync();
+            List<Booking> bookings = (await _repository.GetAllAsync()).ToList();
             Assert.NotNull(bookings);
             Assert.IsTrue(bookings.Count > 0);
-            Assert.AreEqual(expected: "Juan", actual: bookings[0].ClientName);
-            Assert.AreEqual(expected: "Pepe", actual: bookings[1].ClientName);
+            Assert.That(actual: bookings[0].ClientName, Is.EqualTo("Juan"));
+            Assert.That(actual: bookings[1].ClientName, Is.EqualTo("Pepe"));
         }
 
         [Test]
@@ -101,7 +95,7 @@ namespace SettlementService.Infrastructure.Test.Repositories
         {
             Guid nonExistentId = Guid.NewGuid();
             var ex = Assert.ThrowsAsync<KeyNotFoundException>(async () => await _repository.GetByIdAsync(nonExistentId));
-            Assert.AreEqual("Booking not found.", ex.Message);
+            Assert.That(actual: ex.Message, Is.EqualTo("Booking not found."));
         }
 
         [Test]
@@ -109,7 +103,7 @@ namespace SettlementService.Infrastructure.Test.Repositories
         {
             Booking booking = await _repository.GetByIdAsync(_context.Bookings.First().Id);
             Assert.NotNull(booking);
-            Assert.AreEqual(expected: "Juan", actual: booking.ClientName);
+            Assert.That(actual: booking.ClientName, Is.EqualTo("Juan"));
         }
     }
 }

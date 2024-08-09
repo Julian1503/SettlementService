@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using SettlementService.Constants;
 using SettlementService.Domain.Abstractions;
 using SettlementService.Domain.Entities;
@@ -37,12 +32,12 @@ namespace SettlementService.Services
                 throw new ArgumentException("Booking time is required");
             }
 
-            if(await IsBookingAvailableAsync(booking.BookingTime))
+            if(!await IsBookingAvailableAsync(booking.BookingTime))
             {
                 throw new InvalidOperationException("Booking at this time is full");
             }
 
-            if (IsBookingInWorkingHours(booking.BookingTime))
+            if (!IsBookingInWorkingHours(booking.BookingTime))
             {
                 throw new ArgumentException("Booking time is not in the working hours");
             }
