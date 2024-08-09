@@ -18,26 +18,11 @@ namespace SettlementService.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("SettlementService", (db) => db.EnableNullChecks());
+            optionsBuilder.UseInMemoryDatabase("SettlementService");
+
             base.OnConfiguring(optionsBuilder);
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            var cascadeFks = modelBuilder.Model
-                .GetEntityTypes()
-                .SelectMany(t => t.GetForeignKeys())
-                .Where(fk => fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
-
-            foreach (var fk in cascadeFks)
-            {
-                fk.DeleteBehavior = DeleteBehavior.Restrict;
-            }
-
-            modelBuilder.ApplyConfiguration<Booking>(new BookingConfiguration());
-
-            base.OnModelCreating(modelBuilder);
-        }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

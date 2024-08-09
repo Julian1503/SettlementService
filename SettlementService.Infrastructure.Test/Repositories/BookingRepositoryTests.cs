@@ -36,7 +36,7 @@ namespace SettlementService.Infrastructure.Test.Repositories
         {
             Booking booking = new Booking { Id = Guid.NewGuid(), ClientName = "Julian Delgado", BookingTime = new TimeOnly(12,0) };
             Guid newBookingId = await _repository.CreateAsync(booking);
-            Booking newBooking = await _repository.GetByIdAsync(newBookingId);
+            Booking newBooking = await _context.Bookings.FindAsync(newBookingId);
 
             Assert.AreNotEqual(expected: Guid.Empty, actual: newBookingId);
             Assert.NotNull(newBooking);

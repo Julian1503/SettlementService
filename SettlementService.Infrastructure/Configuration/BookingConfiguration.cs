@@ -13,7 +13,7 @@ namespace SettlementService.Infrastructure.Configuration
     {
         public void Configure(EntityTypeBuilder<Booking> builder)
         {
-            builder.ComplexProperty(booking => booking.Id).IsRequired();
+            builder.Property(booking => booking.Id).IsRequired();
 
             builder.Property(booking => booking.ClientName)
                 .HasMaxLength(250)

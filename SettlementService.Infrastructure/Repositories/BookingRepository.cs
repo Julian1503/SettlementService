@@ -14,8 +14,10 @@ namespace SettlementService.Infrastructure.Repositories
         }
 
         public async Task<Guid> CreateAsync(Booking booking)
-        {
-            throw new NotImplementedException();
+        {   
+            _context.Bookings.Add(booking);
+            await _context.SaveChangesAsync();
+            return booking.Id;
         }
 
         public Task<List<Booking>> GetAllAsync()
