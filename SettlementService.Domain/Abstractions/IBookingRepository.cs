@@ -4,6 +4,6 @@ namespace SettlementService.Domain.Abstractions
 {
     public interface IBookingRepository : IRepository<Booking>
     {
-        Task<List<Booking>> GetByTime(TimeOnly bookingTime);
+        Task<List<Booking>> GetByTimeAsync(TimeOnly bookingTime);
     }
 }
