@@ -16,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DependencyInjection\SettlementService.DependencyInjection.csproj" />
+    <ProjectReference Include="..\SettlementService.Constants\SettlementService.Constants.csproj" />
     <ProjectReference Include="..\SettlementService.Infrastructure\SettlementService.Infrastructure.csproj" />
     <ProjectReference Include="..\SettlementService.Interfaces\SettlementService.Interfaces.csproj" />
     <ProjectReference Include="..\SettlementService.Mapper\SettlementService.Mapper.csproj" />
