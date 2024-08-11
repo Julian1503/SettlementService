@@ -17,7 +17,7 @@ namespace SettlementService.Domain.Abstractions
         /// Creates a new entity in the database
         /// </summary>
         /// <param name="entity">Value to be saved</param>
-        /// <returns>Guid</returns>
+        /// <returns>Guid from the entity</returns>
         Task<Guid> CreateAsync(T entity);
 
         /// <summary>

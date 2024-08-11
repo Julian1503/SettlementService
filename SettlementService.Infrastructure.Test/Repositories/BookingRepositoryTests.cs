@@ -43,10 +43,14 @@ namespace SettlementService.Infrastructure.Test.Repositories
         [Test]
         public async Task Create_ShouldAddANewEntityToTheDatabase()
         {
+            //Arrange
             Booking booking = new Booking { Id = Guid.NewGuid(), ClientName = "Julian Delgado", BookingTime = new TimeOnly(12,0) };
             Guid newBookingId = await _repository.CreateAsync(booking);
+
+            //Act
             Booking? newBooking = await _context.Bookings.FindAsync(newBookingId);
 
+            //Assert
             Assert.That(actual: newBookingId, Is.Not.EqualTo(Guid.Empty));
             Assert.NotNull(newBooking);
         }
@@ -54,10 +58,14 @@ namespace SettlementService.Infrastructure.Test.Repositories
         [Test]
         public async Task Create_ShouldAddANewEntityToTheDatabaseWithCorrectValues()
         {
+            //Arrange
             Booking booking = new Booking { Id = Guid.NewGuid(), ClientName = "Julian Delgado", BookingTime = new TimeOnly(12,0) };
             Guid newBookingId = await _repository.CreateAsync(booking);
+
+            //Act
             Booking? newBooking = await _context.Bookings.FindAsync(newBookingId);
 
+            //Assert
             Assert.That(actual: newBooking?.Id, Is.EqualTo(booking.Id));
             Assert.That(actual: newBooking?.ClientName, Is.EqualTo(booking.ClientName));
             Assert.That(actual: newBooking?.BookingTime, Is.EqualTo(booking.BookingTime));
@@ -66,7 +74,10 @@ namespace SettlementService.Infrastructure.Test.Repositories
         [Test]
         public async Task GetAll_ShouldBringAllBookings()
         {
+            //Act
             List<Booking> bookings = (await _repository.GetAllAsync()).ToList();
+
+            //Assert
             Assert.NotNull(bookings);
             Assert.IsTrue(bookings.Count > 0);
         }
@@ -74,7 +85,10 @@ namespace SettlementService.Infrastructure.Test.Repositories
         [Test]
         public async Task GetAll_ShouldBringAllBookingsWithCorrectValues()
         {
+            //Act
             List<Booking> bookings = (await _repository.GetAllAsync()).ToList();
+
+            //Assert
             Assert.NotNull(bookings);
             Assert.IsTrue(bookings.Count > 0);
             Assert.That(actual: bookings[0].ClientName, Is.EqualTo("Juan"));
@@ -84,23 +98,36 @@ namespace SettlementService.Infrastructure.Test.Repositories
         [Test]
         public async Task GetById_ShouldBringABooking()
         {
+            //Act
             Booking booking = await _repository.GetByIdAsync(_context.Bookings.First().Id);
+
+            //Assert
             Assert.NotNull(booking);
         }
 
         [Test]
         public void GetById_ShouldThrowKeyNotFoundException()
         {
+            //Arrange
             Guid nonExistentId = Guid.NewGuid();
+
+            //Act
             var ex = Assert.ThrowsAsync<KeyNotFoundException>(async () => await _repository.GetByIdAsync(nonExistentId));
+
+            //Assert
             Assert.That(actual: ex.Message, Is.EqualTo("Booking not found."));
         }
 
         [Test]
         public async Task GetById_ShouldBringABookingWithCorrectValues()
         {
+            //Arrange
             Booking booking = await _repository.GetByIdAsync(_context.Bookings.First().Id);
+
+            //Act
             Assert.NotNull(booking);
+
+            //Assert
             Assert.That(actual: booking.ClientName, Is.EqualTo("Juan"));
         }
     }

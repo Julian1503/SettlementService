@@ -64,11 +64,14 @@ namespace SettlementService.API.Test.Controllers
         [Test]
         public async Task AddNewBooking_ShouldReturnBadRequest_WhenTimeFormatIsWrong()
         {
+            // Arrange
             var bookingDto = new BookingDto { Id = Guid.NewGuid(), Name = "John Doe", BookingTime = "25:90" };
             _mockedBookingService.Setup(x => x.AddNewBooking(It.IsAny<BookingDto>())).ReturnsAsync(Result.Failure<Guid>(BookingConstants.InvalidTimeFormatError));
 
+            //Act
             var result = await _controller.AddNewBooking(bookingDto) as ObjectResult;
 
+            //Assert
             Assert.NotNull(result);
             Assert.That(actual: ((ProblemDetails)result.Value).Title, Is.EqualTo(BookingConstants.InvalidTimeFormatError.Title));
             Assert.That(actual: ((ProblemDetails)result.Value).Status, Is.EqualTo(BookingConstants.InvalidTimeFormatError.Status));
@@ -81,9 +84,11 @@ namespace SettlementService.API.Test.Controllers
             // Arrange
             var bookingDto = new BookingDto { Id = Guid.NewGuid(), Name = "John Doe", BookingTime = "05:00" };
             _mockedBookingService.Setup(x => x.AddNewBooking(It.IsAny<BookingDto>())).ReturnsAsync(Result.Failure<Guid>(BookingConstants.NotWorkingHoursError));
-
+            
+            //Act
             var result = await _controller.AddNewBooking(bookingDto) as ObjectResult;
 
+            //Assert
             Assert.NotNull(result);
             Assert.That(actual: ((ProblemDetails)result.Value).Title, Is.EqualTo(BookingConstants.NotWorkingHoursError.Title));
             Assert.That(actual: ((ProblemDetails)result.Value).Status, Is.EqualTo(BookingConstants.NotWorkingHoursError.Status));
@@ -97,8 +102,10 @@ namespace SettlementService.API.Test.Controllers
             var bookingDto = new BookingDto { Id = Guid.NewGuid(), Name = "John Doe", BookingTime = "19:00" };
             _mockedBookingService.Setup(x => x.AddNewBooking(It.IsAny<BookingDto>())).ReturnsAsync(Result.Failure<Guid>(BookingConstants.NotWorkingHoursError));
 
+            //Act
             var result = await _controller.AddNewBooking(bookingDto) as ObjectResult;
 
+            //Assert
             Assert.NotNull(result);
             Assert.That(actual: ((ProblemDetails)result.Value).Title, Is.EqualTo(BookingConstants.NotWorkingHoursError.Title));
             Assert.That(actual: ((ProblemDetails)result.Value).Status, Is.EqualTo(BookingConstants.NotWorkingHoursError.Status));
