@@ -2,6 +2,9 @@
 
 namespace SettlementService.Domain.Entities
 {
+    /// <summary>
+    /// Represents a Booking in the database
+    /// </summary>
     public class Booking : BaseEntity
     {
         public required string ClientName { get; set; }

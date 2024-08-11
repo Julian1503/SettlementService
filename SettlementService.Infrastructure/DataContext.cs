@@ -9,7 +9,10 @@ namespace SettlementService.Infrastructure
         {
         }
 
-        public DataContext() { }
+        /// <summary>
+        /// Configuring the in-memory database
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -17,22 +20,6 @@ namespace SettlementService.Infrastructure
 
             base.OnConfiguring(optionsBuilder);
         }
-
-
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            foreach (var entity in ChangeTracker.Entries()
-                .Where(x => x.State == EntityState.Deleted
-                            && x.OriginalValues.Properties
-                                .Any(p => p.Name.Contains("IsDeleted"))))
-            {
-                entity.State = EntityState.Unchanged;
-                entity.CurrentValues["IsDeleted"] = true;
-            }
-
-            return base.SaveChangesAsync();
-        }
-
 
         public DbSet<Booking> Bookings { get; set; }
     }
