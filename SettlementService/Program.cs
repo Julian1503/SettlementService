@@ -1,9 +1,5 @@
-using AutoMapper;
-using SettlementService.Domain.Abstractions;
-using SettlementService.Infrastructure;
-using SettlementService.Infrastructure.Repositories;
-using SettlementService.Interfaces.Booking;
-using SettlementService.Services.Booking;
+using DependencyInjection;
+using SettlementService.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,19 +9,17 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DataContext>();
-builder.Services.AddTransient<IBookingRepository, BookingRepository>();
-builder.Services.AddTransient<IBookingService, BookingService>();
-var app = builder.Build();
 
+builder.Services.AddDependencyInjection();
+
+var app = builder.Build();
+app.UseMiddleware<ExceptionMiddlewareHandler>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
