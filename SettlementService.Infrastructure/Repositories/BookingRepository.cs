@@ -37,11 +37,11 @@ namespace SettlementService.Infrastructure.Repositories
             return booking;
         }
 
-        public async Task<List<Booking>> GetByTimeAsync(TimeOnly bookingTime)
+        public async Task<int> CountSimultanousBookings(TimeOnly bookingTime)
         {
-            List<Booking> bookings = await _context.Bookings.Where(x => x.BookingTime == bookingTime).ToListAsync();
+            int simultanousBookings = await _context.Bookings.CountAsync(bookings => bookings.BookingTime >= bookingTime.AddMinutes(-59) && bookings.BookingTime <= bookingTime.AddMinutes(59));
 
-            return bookings;
+            return simultanousBookings;
         }
     }
 }

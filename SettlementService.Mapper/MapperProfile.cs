@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SettlementService.Domain.Entities;
-using SettlementService.Interfaces.Model;
+using SettlementService.DTO.Booking;
 
 namespace SettlementService.Mapper
 {
@@ -9,8 +9,13 @@ namespace SettlementService.Mapper
         public MapperProfile()
         {
 
-            CreateMap<BookingModel, Booking>(MemberList.Source);
-            CreateMap<Booking, BookingModel>(MemberList.Destination);
+            CreateMap<BookingDto, Booking>().ReverseMap()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ClientName))
+                .ForMember(dest => dest.BookingTime, opt => opt.MapFrom(src => src.BookingTime.ToString("HH:mm")));
+
+            CreateMap<Booking, BookingDto>().ReverseMap()
+                .ForMember(dest => dest.ClientName, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.BookingTime, opt => opt.MapFrom(src => TimeOnly.Parse(src.BookingTime)));
         }
     }
 }

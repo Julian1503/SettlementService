@@ -7,30 +7,34 @@ using SettlementService.Interfaces.Booking;
 using SettlementService.Mapper;
 using SettlementService.Validators;
 
-namespace SettlementService.Services.BookingService
-{
+namespace SettlementService.Services.Booking
+{ 
     public class BookingService : IBookingService
     {
         private IBookingRepository _bookingRepository;
         private IMapper _mapper;
+        private IValidator<BookingDto> _validator;
 
-        public BookingService(IBookingRepository bookingRepository)
+        public BookingService(IBookingRepository bookingRepository, IValidator<BookingDto> validator)
         {
             _bookingRepository = bookingRepository;
-            var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile<MapperProfile>());
+            _validator = validator;
+            MapperConfiguration mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile<MapperProfile>());
             _mapper = mapperConfig.CreateMapper();
         }
 
-        public async Task<Result> AddNewBooking(BookingDto booking)
+        public async Task<Result<Guid>> AddNewBooking(BookingDto booking)
         {
-            BookingValidator.Validate(booking);
-            Booking entity = _mapper.Map<Booking>(booking);
-            return Result.Success(await _bookingRepository.CreateAsync(entity));
-        }
+            Result validation = await _validator.Validate(booking);
 
-        private async Task<bool> IsBookingAvailableAsync(TimeOnly bookingTime)
-        {
-            return (await _bookingRepository.GetByTimeAsync(bookingTime)).Count < BookingConstants.MAX_SIMULTANEOUS_BOOKINGS;
+            if(validation.isFailure)
+            {
+                return Result.Failure<Guid>(validation.Error);
+            }
+
+            Domain.Entities.Booking entity = _mapper.Map<Domain.Entities.Booking>(booking);
+            Guid idBookingAdded = await _bookingRepository.CreateAsync(entity);
+            return Result.Success(idBookingAdded);
         }
     }
 }

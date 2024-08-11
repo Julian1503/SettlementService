@@ -3,8 +3,11 @@ using SettlementService.DTO.Booking;
 
 namespace SettlementService.Interfaces.Booking
 {
+    /// <summary>
+    /// Represents the booking service
+    /// </summary>
     public interface IBookingService
     {
-        Task<Result> AddNewBooking(BookingDto booking);
+        Task<Result<Guid>> AddNewBooking(BookingDto booking);
     }
 }
