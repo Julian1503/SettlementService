@@ -4,16 +4,26 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SettlementService.Domain.Abstractions
 {
-    public record class Error (string Message, HttpStatusCode? Code = null)
+    public class Error : ProblemDetails
     {
-         public static readonly Error None = new(string.Empty);
-         public static readonly Error NullValue = new("Null value", HttpStatusCode.BadRequest);
+        public Error(string title, string detail, int? statusCode = null)
+        {
+            Title = title;
+            Detail = detail;
+            Status = statusCode;
+        }
 
+        public static readonly Error None = new(string.Empty, string.Empty);
+        public static readonly Error NullValue = new("Bad Request", "Null value", 400);
+
+        override public string ToString() => JsonSerializer.Serialize(this);
     }
 
     public class Result
@@ -51,7 +61,7 @@ namespace SettlementService.Domain.Abstractions
 
     public class Result<T> : Result
     {
-        public readonly T? _value;
+        private readonly T? _value;
 
         public Result(T? value,  bool isSuccess, Error error) 
             : base(isSuccess, error) {
@@ -60,7 +70,7 @@ namespace SettlementService.Domain.Abstractions
 
         [NotNull]
         public T Value => isSuccess 
-            ? Value! 
+            ? _value! 
             : throw new InvalidOperationException("The value of a failure result can't be accessed.");
 
         public static implicit operator Result<T>(T? value) => value is not null 

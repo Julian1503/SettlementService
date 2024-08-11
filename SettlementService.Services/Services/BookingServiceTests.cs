@@ -1,10 +1,11 @@
 using AutoMapper;
 using Moq;
-using SettlementService.Constants;
+using SettlementService.Constants.Booking;
 using SettlementService.Domain.Abstractions;
 using SettlementService.Domain.Entities;
+using SettlementService.DTO.Booking;
 using SettlementService.Interfaces.Booking;
-using SettlementService.Interfaces.Model;
+using SettlementService.Services.Booking;
 
 namespace SettlementService.Services.Test.Services
 {
@@ -13,103 +14,156 @@ namespace SettlementService.Services.Test.Services
         private IBookingService _service;
         private Mock<IBookingRepository> _mockedBookingRepository;
         private Mock<IMapper> _mockedMapper;
+        private Mock<IValidator<BookingDto>> _mockedValidator;
 
         [SetUp]
         public void SetUp()
         {
+            // Initialize mocks and set up the BookingService before each test
             InitializeMocks();
-            _service = new BookingService(_mockedBookingRepository.Object);
+            _service = new BookingService(_mockedBookingRepository.Object, _mockedValidator.Object);
         }
 
         [Test]
         public async Task AddNewBooking_ShouldCreateABooking()
         {
-            Guid newBookingIdMock = Guid.NewGuid();
-            _mockedMapper.Setup(x => x.Map<Booking>(It.IsAny<BookingModel>())).Returns(new Booking
+            // Arrange
+            Guid newBookingIdMock = Guid.NewGuid(); // Mocking a new booking ID
+            _mockedMapper.Setup(x => x.Map<Domain.Entities.Booking>(It.IsAny<BookingDto>())).Returns(new Domain.Entities.Booking
             {
                 Id = newBookingIdMock,
                 ClientName = "John Doe",
                 BookingTime = new TimeOnly(10, 0)
             });
 
-            _mockedBookingRepository.Setup(x => x.GetByTimeAsync(It.IsAny<TimeOnly>())).ReturnsAsync(new List<Booking>()
+            // Mocking repository responses
+            _mockedBookingRepository.Setup(x => x.CountSimultanousBookings(It.IsAny<TimeOnly>())).ReturnsAsync(2);
+            _mockedValidator.Setup(x => x.Validate(It.IsAny<BookingDto>())).ReturnsAsync(Result.Success());
+            _mockedBookingRepository.Setup(x => x.CreateAsync(It.IsAny<Domain.Entities.Booking>())).ReturnsAsync(newBookingIdMock);
+
+            // Act
+            Result<Guid> newBookingId = await _service.AddNewBooking(new BookingDto
             {
-                new Booking { Id = Guid.NewGuid(), ClientName = "Juan", BookingTime = new TimeOnly(10,0) },
-                new Booking { Id = Guid.NewGuid(), ClientName = "Pepe", BookingTime = new TimeOnly(11,0) }
+                Id = Guid.NewGuid(),
+                Name = "John Doe",
+                BookingTime = "10:00"
             });
 
-            _mockedBookingRepository.Setup(x => x.CreateAsync(It.IsAny<Booking>())).ReturnsAsync(newBookingIdMock);
-
-            Guid newBookingId = await _service.AddNewBooking(new BookingModel
-            {
-                ClientName = "John Doe",
-                BookingTime = new TimeOnly(10, 0)
-            });
-
-            
+            // Assert
             Assert.NotNull(newBookingId);
-            Assert.That(actual: newBookingId, Is.Not.EqualTo(Guid.Empty));
+            Assert.True(newBookingId.isSuccess);
+            Assert.That(actual: newBookingId.Value, Is.Not.EqualTo(Guid.Empty));
         }
 
         [Test]
-        public void AddNewBooking_ShouldThrowArgumentExceptionWhenClientNameIsEmpty()
+        public async Task AddNewBooking_ShouldReturnErrorWhenClientNameIsEmpty()
         {
-            Assert.ThrowsAsync<ArgumentException>(() => _service.AddNewBooking(new BookingModel
-            {
-                ClientName = "",
-                BookingTime = new TimeOnly(10, 0)
-            }));
-        }
+            // Arrange
+            _mockedValidator.Setup(x => x.Validate(It.IsAny<BookingDto>())).ReturnsAsync(Result.Failure(BookingConstants.ClientNameRequiredError));
 
-        [Test]
-        public void AddNewBooking_ShouldThrowInvalidOperationExceptionWhenBookingTimeIsFull()
-        {
-            _mockedBookingRepository.Setup(x => x.GetByTimeAsync(It.IsAny<TimeOnly>())).ReturnsAsync(new List<Booking>()
+            // Act
+            Result response = await _service.AddNewBooking(new BookingDto
             {
-                new Booking { Id = Guid.NewGuid(), ClientName = "Juan", BookingTime = new TimeOnly(10,0) },
-                new Booking { Id = Guid.NewGuid(), ClientName = "Pepe", BookingTime = new TimeOnly(11,0) },
-                new Booking { Id = Guid.NewGuid(), ClientName = "Perez", BookingTime = new TimeOnly(12,0) },
-                new Booking { Id = Guid.NewGuid(), ClientName = "Tito", BookingTime = new TimeOnly(13,0) }
+                Id = Guid.NewGuid(),
+                Name = "",
+                BookingTime = "10:00"
             });
 
-            Assert.ThrowsAsync<InvalidOperationException>(() => _service.AddNewBooking(new BookingModel
-            {
-                ClientName = "John Doe",
-                BookingTime = new TimeOnly(10, 0)
-            }));
+            // Assert
+            Assert.That(actual: response.isFailure, Is.True); 
+            Assert.That(actual: response.Error, Is.EqualTo(BookingConstants.ClientNameRequiredError));
         }
 
         [Test]
-        public void AddNewBooking_ShouldThrowArgumentExceptionWhenBookingTimeIsNotInWorkingHours_LessThanStartTime()
+        public async Task AddNewBooking_ShouldReturnFailureWhenBookingTimeIsFull()
         {
-            Assert.ThrowsAsync<ArgumentException>(() => _service.AddNewBooking(new BookingModel
+            // Arrange
+            _mockedValidator.Setup(x => x.Validate(It.IsAny<BookingDto>())).ReturnsAsync(Result.Failure(BookingConstants.BookingFullError));
+
+            // Act
+            Result response = await _service.AddNewBooking(new BookingDto
             {
-                ClientName = "John Doe",
-                BookingTime = new TimeOnly(BookingConstants.START_TIME.Hour - 1, 0)
-            }));
+                Id = Guid.NewGuid(),
+                Name = "Pepe",
+                BookingTime = "10:00"
+            });
+
+            // Assert
+            Assert.That(actual: response.isFailure, Is.True);
+            Assert.That(actual: response.Error, Is.EqualTo(BookingConstants.BookingFullError));
         }
 
         [Test]
-        public void AddNewBooking_ShouldThrowArgumentExceptionWhenBookingTimeIsNotInWorkingHours_MoreThanLastBookingTime()
+        public async Task AddNewBooking_ShouldReturnFailureWhenBookingTimeIsNotInWorkingHours_LessThanStartTime()
         {
-            Assert.ThrowsAsync<ArgumentException>(() => _service.AddNewBooking(new BookingModel
+            // Arrange
+            _mockedValidator.Setup(x => x.Validate(It.IsAny<BookingDto>())).ReturnsAsync(Result.Failure(BookingConstants.NotWorkingHoursError));
+
+            // Act
+            Result response = await _service.AddNewBooking(new BookingDto
             {
-                ClientName = "John Doe",
-                BookingTime = new TimeOnly(BookingConstants.END_TIME.Hour, 0)
-            }));
+                Id = Guid.NewGuid(),
+                Name = "Pepe",
+                BookingTime = (BookingConstants.START_TIME.Hour - 1).ToString() + ":00" // Time outside of working hours
+            });
+
+            // Assert
+            Assert.That(actual: response.isFailure, Is.True); 
+            Assert.That(actual: response.Error, Is.EqualTo(BookingConstants.NotWorkingHoursError));
+        }
+
+        [Test]
+        public async Task AddNewBooking_ShouldReturnFailureWhenBookingTimeIsNotInWorkingHours_MoreThanLastBookingTime()
+        {
+            // Arrange
+            _mockedValidator.Setup(x => x.Validate(It.IsAny<BookingDto>())).ReturnsAsync(Result.Failure(BookingConstants.NotWorkingHoursError));
+
+            // Act
+            Result response = await _service.AddNewBooking(new BookingDto
+            {
+                Id = Guid.NewGuid(),
+                Name = "Pepe",
+                BookingTime = BookingConstants.END_TIME.Hour.ToString() + ":00" // Time outside of working hours
+            });
+
+            // Assert
+            Assert.That(actual: response.isFailure, Is.True);
+            Assert.That(actual: response.Error, Is.EqualTo(BookingConstants.NotWorkingHoursError));
+        }
+
+        [Test]
+        public async Task AddNewBooking_ShouldReturnFailureWhenTimeFormatIsWrong()
+        {
+            // Arrange
+            _mockedValidator.Setup(x => x.Validate(It.IsAny<BookingDto>())).ReturnsAsync(Result.Failure(BookingConstants.InvalidTimeFormatError));
+
+            // Act
+            Result response = await _service.AddNewBooking(new BookingDto
+            {
+                Id = Guid.NewGuid(),
+                Name = "Pepe",
+                BookingTime = "25:90" // Invalid time format
+            });
+
+            // Assert
+            Assert.That(actual: response.isFailure, Is.True); 
+            Assert.That(actual: response.Error, Is.EqualTo(BookingConstants.InvalidTimeFormatError));
         }
 
         #region MOCK Init
         private void InitializeMocks()
         {
+            // Initialize and configure all mocks
             _mockedBookingRepository = new Mock<IBookingRepository>();
             _mockedMapper = new Mock<IMapper>();
+            _mockedValidator = new Mock<IValidator<BookingDto>>();
             SetupMockedMapper();
             SetupMockedBookingRepository();
         }
         private void SetupMockedMapper()
         {
-            _mockedMapper.Setup(x => x.Map<Booking>(It.IsAny<BookingModel>())).Returns(new Booking
+            // Set up mock behavior for IMapper
+            _mockedMapper.Setup(x => x.Map<Domain.Entities.Booking>(It.IsAny<BookingDto>())).Returns(new Domain.Entities.Booking
             {
                 Id = Guid.NewGuid(),
                 ClientName = "John Doe",
@@ -119,15 +173,11 @@ namespace SettlementService.Services.Test.Services
 
         private void SetupMockedBookingRepository()
         {
-            _mockedBookingRepository.Setup(x => x.GetByTimeAsync(It.IsAny<TimeOnly>())).ReturnsAsync(new List<Booking>()
-            {
-                new Booking { Id = Guid.NewGuid(), ClientName = "Juan", BookingTime = new TimeOnly(10,0) },
-                new Booking { Id = Guid.NewGuid(), ClientName = "Pepe", BookingTime = new TimeOnly(11,0) }
-            });
-
-            _mockedBookingRepository.Setup(x => x.CreateAsync(It.IsAny<Booking>())).ReturnsAsync(Guid.NewGuid());
+            // Set up mock behavior for IBookingRepository
+            _mockedBookingRepository.Setup(x => x.CountSimultanousBookings(It.IsAny<TimeOnly>())).ReturnsAsync(2);
+            _mockedBookingRepository.Setup(x => x.CreateAsync(It.IsAny<Domain.Entities.Booking>())).ReturnsAsync(Guid.NewGuid());
         }
 
+        #endregion
     }
-#endregion
 }

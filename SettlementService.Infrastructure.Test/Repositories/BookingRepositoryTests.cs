@@ -66,7 +66,6 @@ namespace SettlementService.Infrastructure.Test.Repositories
         [Test]
         public async Task GetAll_ShouldBringAllBookings()
         {
-            //override bookings from context to test
             List<Booking> bookings = (await _repository.GetAllAsync()).ToList();
             Assert.NotNull(bookings);
             Assert.IsTrue(bookings.Count > 0);
@@ -75,7 +74,6 @@ namespace SettlementService.Infrastructure.Test.Repositories
         [Test]
         public async Task GetAll_ShouldBringAllBookingsWithCorrectValues()
         {
-            //override bookings from context to test
             List<Booking> bookings = (await _repository.GetAllAsync()).ToList();
             Assert.NotNull(bookings);
             Assert.IsTrue(bookings.Count > 0);
