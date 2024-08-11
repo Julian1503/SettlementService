@@ -1,4 +1,4 @@
-﻿namespace SettlementService.API.Dto
+﻿namespace SettlementService.DTO.Booking
 {
     public class BookingDto
     {

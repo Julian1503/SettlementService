@@ -3,7 +3,7 @@ using Moq;
 using SettlementService.Constants;
 using SettlementService.Domain.Abstractions;
 using SettlementService.Domain.Entities;
-using SettlementService.Interfaces;
+using SettlementService.Interfaces.Booking;
 using SettlementService.Interfaces.Model;
 
 namespace SettlementService.Services.Test.Services
@@ -18,7 +18,7 @@ namespace SettlementService.Services.Test.Services
         public void SetUp()
         {
             InitializeMocks();
-            _service = new BookingService(_mockedBookingRepository.Object, _mockedMapper.Object);
+            _service = new BookingService(_mockedBookingRepository.Object);
         }
 
         [Test]

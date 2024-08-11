@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using SettlementService.API.Controllers;
-using SettlementService.Interfaces;
+using SettlementService.Interfaces.Booking;
 
 namespace SettlementService.API.Test.Controllers
 {
@@ -26,9 +26,11 @@ namespace SettlementService.API.Test.Controllers
         {
             var controller = new BookingController(bookingService.Object);
 
-            var result = controller.AddBooking();
+            var result = controller.AddBooking(new Dto.BookingDto());
             
             Assert.IsInstanceOf<OkResult>(result);
         }
+
+
     }
 }

@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SettlementService.Constants\SettlementService.Constants.csproj" />
+	<ProjectReference Include="..\SettlementService.Constants\SettlementService.Constants.csproj" />
+	<ProjectReference Include="..\SettlementService.Constants\SettlementService.Constants.csproj" />
+    <ProjectReference Include="..\SettlementService.Constants\SettlementService.Constants.csproj" />
     <ProjectReference Include="..\SettlementService.Domain\SettlementService.Domain.csproj" />
     <ProjectReference Include="..\SettlementService.DTO\SettlementService.DTO.csproj" />
   </ItemGroup>

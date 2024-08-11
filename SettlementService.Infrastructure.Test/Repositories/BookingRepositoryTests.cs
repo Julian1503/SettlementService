@@ -45,7 +45,7 @@ namespace SettlementService.Infrastructure.Test.Repositories
         {
             Booking booking = new Booking { Id = Guid.NewGuid(), ClientName = "Julian Delgado", BookingTime = new TimeOnly(12,0) };
             Guid newBookingId = await _repository.CreateAsync(booking);
-            Booking newBooking = await _context.Bookings.FindAsync(newBookingId);
+            Booking? newBooking = await _context.Bookings.FindAsync(newBookingId);
 
             Assert.That(actual: newBookingId, Is.Not.EqualTo(Guid.Empty));
             Assert.NotNull(newBooking);
@@ -56,11 +56,11 @@ namespace SettlementService.Infrastructure.Test.Repositories
         {
             Booking booking = new Booking { Id = Guid.NewGuid(), ClientName = "Julian Delgado", BookingTime = new TimeOnly(12,0) };
             Guid newBookingId = await _repository.CreateAsync(booking);
-            Booking newBooking = await _context.Bookings.FindAsync(newBookingId);
+            Booking? newBooking = await _context.Bookings.FindAsync(newBookingId);
 
-            Assert.That(actual: newBooking.Id, Is.EqualTo(booking.Id));
-            Assert.That(actual: newBooking.ClientName, Is.EqualTo(booking.ClientName));
-            Assert.That(actual: newBooking.BookingTime, Is.EqualTo(booking.BookingTime));
+            Assert.That(actual: newBooking?.Id, Is.EqualTo(booking.Id));
+            Assert.That(actual: newBooking?.ClientName, Is.EqualTo(booking.ClientName));
+            Assert.That(actual: newBooking?.BookingTime, Is.EqualTo(booking.BookingTime));
         }
 
         [Test]

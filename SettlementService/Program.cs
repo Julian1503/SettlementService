@@ -1,6 +1,9 @@
+using AutoMapper;
 using SettlementService.Domain.Abstractions;
 using SettlementService.Infrastructure;
 using SettlementService.Infrastructure.Repositories;
+using SettlementService.Interfaces.Booking;
+using SettlementService.Services.Booking;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddTransient<IBookingRepository, BookingRepository>();
+builder.Services.AddTransient<IBookingService, BookingService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.API", "SettlementService\SettlementService.API.csproj", "{A2380ADC-2E95-4300-8898-D24A7F6300D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettlementService.API", "SettlementService\SettlementService.API.csproj", "{A2380ADC-2E95-4300-8898-D24A7F6300D6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{D4547A0C-A34B-44F4-B165-12782E62771B}"
 EndProject
@@ -13,23 +13,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{10D1F756-0FDE-443F-A80C-A3DD451E77A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Domain", "SettlementService.Domain\SettlementService.Domain.csproj", "{59BD14EB-BD6B-4605-9F08-5CCFCA4B867B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettlementService.Domain", "SettlementService.Domain\SettlementService.Domain.csproj", "{59BD14EB-BD6B-4605-9F08-5CCFCA4B867B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Infrastructure", "SettlementService.Infrastructure\SettlementService.Infrastructure.csproj", "{59248664-5C1B-4B38-B63C-0F2CF9081FAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettlementService.Infrastructure", "SettlementService.Infrastructure\SettlementService.Infrastructure.csproj", "{59248664-5C1B-4B38-B63C-0F2CF9081FAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Services", "SettlementService.Service\SettlementService.Services.csproj", "{AA75DF7E-5C7A-4C7D-BEE1-E01B7F6327EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettlementService.Services", "SettlementService.Service\SettlementService.Services.csproj", "{AA75DF7E-5C7A-4C7D-BEE1-E01B7F6327EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Interfaces", "SettlementService.Interfaces\SettlementService.Interfaces.csproj", "{4AC0BFDF-7D13-4D55-9145-AD984EB3D054}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettlementService.Interfaces", "SettlementService.Interfaces\SettlementService.Interfaces.csproj", "{4AC0BFDF-7D13-4D55-9145-AD984EB3D054}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Services.Test", "SettlementService.Services\SettlementService.Services.Test.csproj", "{B4BB174D-12EA-4C23-B45C-B27C4DA31956}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettlementService.Services.Test", "SettlementService.Services\SettlementService.Services.Test.csproj", "{B4BB174D-12EA-4C23-B45C-B27C4DA31956}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Constants", "SettlementService.Constants\SettlementService.Constants.csproj", "{284AFC04-56B6-4457-8314-3EC48701AB08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettlementService.Constants", "SettlementService.Constants\SettlementService.Constants.csproj", "{284AFC04-56B6-4457-8314-3EC48701AB08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Infrastructure.Test", "SettlementService.Infrastructure.Test\SettlementService.Infrastructure.Test.csproj", "{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettlementService.Infrastructure.Test", "SettlementService.Infrastructure.Test\SettlementService.Infrastructure.Test.csproj", "{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.Mapper", "SettlementService.Mapper\SettlementService.Mapper.csproj", "{73AEE507-CED4-4A36-BB13-A62DE7F754D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettlementService.Mapper", "SettlementService.Mapper\SettlementService.Mapper.csproj", "{73AEE507-CED4-4A36-BB13-A62DE7F754D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.API.Test", "SettlementService.API.Test\SettlementService.API.Test.csproj", "{0883E726-3F4F-4AA0-9436-6B424E64F141}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettlementService.API.Test", "SettlementService.API.Test\SettlementService.API.Test.csproj", "{0883E726-3F4F-4AA0-9436-6B424E64F141}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettlementService.Validators", "SettlementService.Validators\SettlementService.Validators.csproj", "{0EEBA71B-038C-4050-8BF0-F3DBAE392C38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettlementService.DTO", "SettlementService.DTO\SettlementService.DTO.csproj", "{E81E4371-7B4B-4B4E-882F-79DB02652BBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,11 +81,20 @@ Global
 		{0883E726-3F4F-4AA0-9436-6B424E64F141}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0883E726-3F4F-4AA0-9436-6B424E64F141}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0883E726-3F4F-4AA0-9436-6B424E64F141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EEBA71B-038C-4050-8BF0-F3DBAE392C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EEBA71B-038C-4050-8BF0-F3DBAE392C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EEBA71B-038C-4050-8BF0-F3DBAE392C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EEBA71B-038C-4050-8BF0-F3DBAE392C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E81E4371-7B4B-4B4E-882F-79DB02652BBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E81E4371-7B4B-4B4E-882F-79DB02652BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E81E4371-7B4B-4B4E-882F-79DB02652BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E81E4371-7B4B-4B4E-882F-79DB02652BBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{A2380ADC-2E95-4300-8898-D24A7F6300D6} = {D4547A0C-A34B-44F4-B165-12782E62771B}
 		{59BD14EB-BD6B-4605-9F08-5CCFCA4B867B} = {D527525C-BE02-49BC-AC1C-DB301EAA2D25}
 		{59248664-5C1B-4B38-B63C-0F2CF9081FAB} = {76193AD4-0D17-4003-8B0D-07B918989A8D}
 		{AA75DF7E-5C7A-4C7D-BEE1-E01B7F6327EE} = {D4547A0C-A34B-44F4-B165-12782E62771B}
@@ -91,6 +104,8 @@ Global
 		{8AAC4F87-1D71-4347-8947-7FCFCDD27CE6} = {10D1F756-0FDE-443F-A80C-A3DD451E77A8}
 		{73AEE507-CED4-4A36-BB13-A62DE7F754D4} = {D4547A0C-A34B-44F4-B165-12782E62771B}
 		{0883E726-3F4F-4AA0-9436-6B424E64F141} = {10D1F756-0FDE-443F-A80C-A3DD451E77A8}
+		{0EEBA71B-038C-4050-8BF0-F3DBAE392C38} = {D4547A0C-A34B-44F4-B165-12782E62771B}
+		{E81E4371-7B4B-4B4E-882F-79DB02652BBE} = {D4547A0C-A34B-44F4-B165-12782E62771B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B3CFB8B-C9D4-46F0-A805-BE187E6D1FEC}

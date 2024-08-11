@@ -27,7 +27,7 @@ namespace SettlementService.Infrastructure.Repositories
 
         public async Task<Booking> GetByIdAsync(Guid bookingId)
         {
-            var booking = await _context.Bookings.FirstOrDefaultAsync(x => x.Id == bookingId);
+            Booking? booking = await _context.Bookings.FirstOrDefaultAsync(x => x.Id == bookingId);
 
             if (booking == null)
             {
@@ -37,9 +37,11 @@ namespace SettlementService.Infrastructure.Repositories
             return booking;
         }
 
-        public Task<List<Booking>> GetByTimeAsync(TimeOnly bookingTime)
+        public async Task<List<Booking>> GetByTimeAsync(TimeOnly bookingTime)
         {
-            throw new NotImplementedException();
+            List<Booking> bookings = await _context.Bookings.Where(x => x.BookingTime == bookingTime).ToListAsync();
+
+            return bookings;
         }
     }
 }
