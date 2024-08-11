@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SettlementService.Constants\SettlementService.Constants.csproj" />
+    <ProjectReference Include="..\SettlementService.Domain\SettlementService.Domain.csproj" />
+    <ProjectReference Include="..\SettlementService.Interfaces\SettlementService.Interfaces.csproj" />
+    <ProjectReference Include="..\SettlementService.Mapper\SettlementService.Mapper.csproj" />
+    <ProjectReference Include="..\SettlementService.Validators\SettlementService.Validators.csproj" />
+  </ItemGroup>
+
+</Project>
