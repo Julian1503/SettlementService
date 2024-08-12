@@ -20,6 +20,11 @@ namespace SettlementService.Validators
                 return Result.Failure(BookingConstants.ClientNameRequiredError);
             }
 
+            if(booking.Name.Length > BookingConstants.MAX_NAME_LENGTH)
+            {
+                return Result.Failure(BookingConstants.ClientNameTooLongError);
+            }
+
             TimeOnly bookingTime;
 
             if (!TimeOnly.TryParse(booking.BookingTime, out bookingTime))
