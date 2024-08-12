@@ -21,6 +21,11 @@ namespace SettlementService.Constants.Booking
         public static readonly TimeOnly LAST_BOOKING_TIME = END_TIME.AddMinutes(-DURATION);
 
         /// <summary>
+        /// Value for the maximum length of the client name
+        /// </summary>
+        public static readonly int MAX_NAME_LENGTH = 250;
+
+        /// <summary>
         /// Duration of each booking in minutes
         /// </summary>
         public const int DURATION = 60;
@@ -49,5 +54,10 @@ namespace SettlementService.Constants.Booking
         /// Error when the booking time is with a wrong format
         /// </summary>
         public static readonly Error InvalidTimeFormatError = new Error("Bad Request", "Invalid time format.", 400);
+
+        /// <summary>
+        /// Error when the client name is too long
+        /// </summary>
+        public static readonly Error ClientNameTooLongError = new Error("Bad Request", "Client Name too long.", 400);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SettlementService.Constants.Booking;
 using SettlementService.Domain.Entities;
 
 namespace SettlementService.Infrastructure.Configuration
@@ -11,7 +12,7 @@ namespace SettlementService.Infrastructure.Configuration
             builder.Property(booking => booking.Id).IsRequired();
 
             builder.Property(booking => booking.ClientName)
-                .HasMaxLength(250)
+                .HasMaxLength(BookingConstants.MAX_NAME_LENGTH)
                 .IsRequired();
 
             builder.Property(booking => booking.BookingTime)

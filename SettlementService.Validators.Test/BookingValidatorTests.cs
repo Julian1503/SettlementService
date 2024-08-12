@@ -94,6 +94,25 @@ namespace SettlementService.Validators.Test
         }
 
         [Test]
+        public async Task Validate_ShouldReturnFailure_WhenClientNameIsTooLong()
+        {
+            // Arrange
+            //name with 264 characters
+            var bookingDto = new BookingDto
+            {
+                Name = "Joooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooohn Dooooooooooooooooooooooooooooooooooooooooooooeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                BookingTime = "10:00"
+            };
+
+            // Act
+            var result = await _validator.Validate(bookingDto);
+
+            // Assert
+            Assert.IsFalse(result.isSuccess);
+            Assert.That(actual: result.Error, Is.EqualTo(BookingConstants.ClientNameTooLongError));
+        }
+
+        [Test]
         public async Task Validate_ShouldReturnSuccess_WhenBookingIsValid()
         {
             // Arrange

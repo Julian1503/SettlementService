@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SettlementService.Constants\SettlementService.Constants.csproj" />
     <ProjectReference Include="..\SettlementService.Domain\SettlementService.Domain.csproj" />
   </ItemGroup>
 
